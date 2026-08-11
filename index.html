@@ -4,132 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Happy Birthday Sky! 🎂</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      background: radial-gradient(circle at center, #2b1055, #7597de);
-      color: #ffffff;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow-x: hidden;
-      padding: 20px;
-    }
-
-    .card {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(15px);
-      padding: 2.5rem;
-      border-radius: 24px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
-      max-width: 600px;
-      width: 100%;
-      z-index: 10;
-      text-align: center;
-      animation: popIn 0.8s ease-out;
-    }
-
-    .encouragement-bar {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 1.5rem;
-    }
-
-    .tag {
-      background: rgba(255, 255, 255, 0.2);
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      animation: pulse 3s infinite ease-in-out;
-    }
-
-    h1 {
-      font-size: 2.4rem;
-      margin-bottom: 1rem;
-      background: linear-gradient(45deg, #ff9a9e, #fecfef, #a1c4fd);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .tabs {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 1.5rem;
-      flex-wrap: wrap;
-    }
-
-    .tab-btn {
-      background: rgba(255, 255, 255, 0.15);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      color: white;
-      padding: 10px 18px;
-      border-radius: 30px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: all 0.3s ease;
-    }
-
-    .tab-btn.active, .tab-btn:hover {
-      background: #ff7675;
-      border-color: #ff7675;
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(255, 118, 117, 0.4);
-    }
-
-    .wish-box {
-      background: rgba(0, 0, 0, 0.2);
-      padding: 1.5rem;
-      border-radius: 16px;
-      font-size: 1.1rem;
-      line-height: 1.7;
-      min-height: 180px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: left;
-      transition: opacity 0.3s ease;
-    }
-
-    @keyframes popIn {
-      0% { opacity: 0; transform: scale(0.8) translateY(20px); }
-      100% { opacity: 1; transform: scale(1) translateY(0); }
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-    }
-
-    .particle {
-      position: absolute;
-      border-radius: 50%;
-      pointer-events: none;
-      animation: float 6s infinite ease-in-out;
-    }
-
-    @keyframes float {
-      0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
-    }
-  </style>
+  
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+  <button id="musicBtn" class="music-toggle" onclick="toggleMusic()">🎵 Play Music</button>
+  <audio id="bgMusic" loop src="happy-birthday.mp3"></audio>
+
   <div class="card">
+
+    <div class="countdown-container" id="countdownBox">
+      <span class="countdown-label">⏳ Countdown to Sky's Big Day:</span>
+      <div id="timer" class="timer-display">Loading timer...</div>
+    </div>
+
     <div class="encouragement-bar">
       <span class="tag">🌟 Dream Big</span>
       <span class="tag">🚀 Keep Glowing</span>
@@ -138,6 +29,16 @@
 
     <h1>Happy Birthday, Sky! 🎉</h1>
 
+    <div class="cake-container" onclick="blowCandle()" title="Click to blow out the candle!">
+      <div class="flame" id="flame"></div>
+      <div class="candle"></div>
+      <div class="cake-top"></div>
+      <div class="cake-base"></div>
+    </div>
+    <p id="candleText" class="candle-hint">Tap the flame to make a wish & blow it out! 🕯️</p>
+
+    <button class="celebrate-btn" onclick="launchConfetti()">Pop Confetti! 🥳</button>
+
     <div class="tabs">
       <button class="tab-btn active" onclick="showWish(0, this)">🎉 From Both of Us</button>
       <button class="tab-btn" onclick="showWish(1, this)">💙 From Me</button>
@@ -145,55 +46,9 @@
     </div>
 
     <div class="wish-box" id="wishDisplay"></div>
+
   </div>
 
-  <script>
-    const wishes = [
-      // 1. Merged Wish
-      "Happy Birthday, Sky! 🎉✨<br><br>Jia and I are sending you the absolute biggest birthday wishes today! We hope your day is filled with good vibes, lots of laughs, and all your favorite things.<br><br>May this next year bring you endless happiness, amazing adventures, and major success in everything you do. You deserve the absolute best day ever—enjoy every single second of it! 🎂🥳🎈",
-
-      // 2. Your Individual Wish
-      "Happy Birthday, Sky! 🎈✨<br><br>I wanted to send a huge birthday wish your way! I hope today is as incredible, bright, and full of energy as you are.<br><br>Thank you for being such an awesome person to have in my life. I’m so grateful for all the fun moments we’ve shared, and I’m hyped for everything this next year has in store for you. May this year bring you huge wins, endless happiness, and all the success you’ve been working for.<br><br>Have the absolute best day celebrating—you deserve all of it and more! 🎂🥳🚀",
-
-      // 3. Jia's Wish (RESERVED SPACE)
-      "<i>Jia's special wish is incoming... Stay tuned! 💖✨</i>"
-    ];
-
-    function showWish(index, btnElement) {
-      const display = document.getElementById("wishDisplay");
-      
-      document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
-      btnElement.classList.add("active");
-
-      display.style.opacity = 0;
-      setTimeout(() => {
-        display.innerHTML = wishes[index];
-        display.style.opacity = 1;
-      }, 200);
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      document.getElementById("wishDisplay").innerHTML = wishes[0];
-    });
-
-    // Particle Animation
-    for (let i = 0; i < 35; i++) {
-      const particle = document.createElement("div");
-      particle.classList.add("particle");
-      
-      const size = Math.random() * 12 + 6;
-      particle.style.width = size + "px";
-      particle.style.height = size + "px";
-      particle.style.left = Math.random() * 100 + "vw";
-      particle.style.animationDuration = (Math.random() * 4 + 4) + "s";
-      particle.style.animationDelay = Math.random() * 3 + "s";
-      
-      const colors = ["#ff7675", "#fdcb6e", "#00b894", "#74b9ff", "#a29bfe", "#fd79a8"];
-      particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-      
-      document.body.appendChild(particle);
-    }
-  </script>
-
+  <script src="script.js"></script>
 </body>
 </html>
