@@ -49,7 +49,7 @@ But... let's end it with love instead of regret now, shall we?<br>
 
 I love you, mi' lady.<br>
 
-Even though not the way you wanted, yes. But atleast my love ain't short or fake. It'll always be real.<br>"
+Even though not the way you wanted, yes. But atleast my love ain't short or fake. It'll always be real.<br>",
 ];
 
 // --- 2. TAB SWITCHER FUNCTION ---
