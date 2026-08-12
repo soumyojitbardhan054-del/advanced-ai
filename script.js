@@ -7,7 +7,8 @@ const wishes = [
   "Happy Birthday, Sky! 🎈✨<br><br>I wanted to send a huge birthday wish your way! I hope today is as incredible, bright, and full of energy as you are.<br><br>Thank you for being such an awesome person to have in my life. I’m so grateful for all the fun moments we’ve shared, and I’m hyped for everything this next year has in store for you. May this year bring you huge wins, endless happiness, and all the success you’ve been working for.<br><br>Have the absolute best day celebrating—you deserve all of it and more! 🎂🥳🚀",
 
   // 3. Jia's Wish (RESERVED SPACE)
-  "`Hey... I know we ain't talking anymore I wish we could. But god actually decided different paths for us now. But that doesn't mean that we'll NEVER be together again.<br>
+  // FIXED: Replaced the double quotes surrounding this multi-line string with backticks (`)
+  `Hey... I know we ain't talking anymore I wish we could. But god actually decided different paths for us now. But that doesn't mean that we'll NEVER be together again.<br>
 Maybe one day we'll still meet again even after all the circumstances and difficulties, I know we'll meet again.<br>
 I know there are still a lot of misunderstandings between us now, a lot of fights that happened in the past, our family not agreeing for us to be friends anymore, I know it's hard.<br>
 But can I ask you a few things?<br><br>
@@ -49,7 +50,7 @@ But... let's end it with love instead of regret now, shall we?<br>
 
 I love you, mi' lady.<br>
 
-Even though not the way you wanted, yes. But atleast my love ain't short or fake. It'll always be real.<br>",
+Even though not the way you wanted, yes. But atleast my love ain't short or fake. It'll always be real.<br>`
 ];
 
 // --- 2. TAB SWITCHER FUNCTION ---
